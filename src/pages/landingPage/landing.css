@@ -1,0 +1,21 @@
+.image{
+    width: 120vh;
+}
+
+.image-container{
+    text-align: center;
+    margin-top: 40px;
+}
+
+.description-img{
+    font-style: italic;
+    color: grey;
+    position: relative;
+    top: -20px;
+}
+
+@media only screen and (max-width: 900px){
+    .image{
+        width: 50vh;
+    }
+}

@@ -1,0 +1,102 @@
+.register-container{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+
+.reg-label{
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: grey;
+}
+
+.reg-input{
+    margin-bottom: 30px;
+    width: 350px;
+    height: 30px;
+    padding-left: 10px;
+    font-size: 17px;
+    border: none;
+    border-bottom: 2px solid gray;
+    outline: none;
+}
+
+.reg-input-radio{
+    margin-left: 30px;
+}
+
+.reg-btn{
+    display: block;
+    margin-top: 20px;
+    width: 330px;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    font-size: 18px;
+    text-transform: uppercase;
+    cursor: pointer;
+    background-color: #163f5d;
+    color: white;
+    padding: 10px;
+}
+
+.reg-btn:hover{
+    background-color: #174a6e;
+}
+
+.reg-btn:disabled{
+    background-color: grey;
+    cursor: no-drop;
+    color: black;
+}
+
+.reg-error{
+    color: red;
+    position: relative;
+    top: -43px;
+    font-weight: 500;
+}
+
+.reg-error-category{
+    color: red;
+    position: relative;
+    top: -15px;
+}
+
+.reg-txt{
+    display: flex;
+    justify-content: center;
+}
+
+.loader {
+    border:7px solid rgb(230, 225, 225);
+    border-radius: 50%;
+    border-top: 7px solid #3498db;
+    width: 7px;
+    height: 7px;
+    margin-left: 10px;
+    -webkit-animation: spin 3s linear infinite; 
+    animation: spin 3s linear infinite;
+  }
+  
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .has-account{
+      color: grey;
+      text-align: center;
+  }
+
+
+
+
+
+

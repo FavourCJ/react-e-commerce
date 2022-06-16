@@ -1,0 +1,97 @@
+.card-section-container{
+    display: flex;
+   
+}
+
+.card-section{
+    margin-right: 20px;
+    padding: 10px 100px;
+    background-color: #184362;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.39);
+    color: white;
+    
+}
+
+.num{
+    font-weight: 500;
+    font-size: 20px;
+    text-align: center;
+}
+
+.num-title{
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.chartSection-container{
+    margin-top: 40px;
+}
+
+.chart {
+    background-color: white;
+    width: 150vh auto ;
+    box-shadow: 5px 11px 15px rgba(128, 128, 128, 0.374);
+
+}
+  
+  .chartTitle {
+    margin-top: 50px;
+  }
+
+  .chart-graph{
+    margin: 30px;
+}
+
+.userDummyList-container{
+    margin-top: 30px;
+}
+
+.dummy-avatar{
+    width: 40px;
+    margin-bottom: 10px;
+}
+
+.table{
+    border-collapse: collapse;
+    width: 100%;
+    box-shadow:  5px 11px 15px rgba(128, 128, 128, 0.374);
+}
+
+
+.data, .table-header {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 15px 0px 10px 20px;
+ 
+  }
+
+  .dummy-p{
+      font-weight: 700;
+      font-size: 19px;
+      margin-top: 40px;
+  }
+ 
+@media only screen and (max-width: 900px){
+    .card-section-container{
+        display: block;
+        margin-left: -30px;
+       
+    }
+
+    .card-section{
+        margin-top: 20px; 
+        width: 10vh;
+    }
+
+    .chart{
+        position: relative;
+        left: -30px;
+        height: 25vh;
+    
+    }
+
+    .userDummyList-container{
+        position: relative;
+        left: -30px;
+    }
+}

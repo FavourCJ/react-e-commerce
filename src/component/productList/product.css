@@ -1,0 +1,58 @@
+.edit-item{
+    background-color: transparent;
+    color: rgb(19, 182, 19);
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.delete-item{
+    background-color: transparent;
+    color: red;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.productList-container{
+    display: flex;
+}
+
+.product-list-content{
+    margin: 60px 70px;
+}
+
+.product-table{
+    border-collapse: collapse;
+    width: 100%;  
+}
+
+.product-table-header, 
+.product-table-data{
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 15px 15px 10px 15px;
+}
+
+.product-list-header{
+    font-size: 27px;
+    margin-bottom: 30px;
+}
+
+@media only screen and (max-width: 900px){
+    .product-list-content{
+        margin: 60px -40px;
+    }
+
+    .product-table-header{
+        font-size: 10px;
+    }
+
+    
+.product-list-header{
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+
+}

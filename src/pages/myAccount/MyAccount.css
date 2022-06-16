@@ -1,0 +1,75 @@
+.admin-sidebar-myaccount{
+    display: flex;
+}
+
+.admin-myaccount-content{
+    margin: 50px 50px;
+}
+
+.my-account-label{
+    font-weight: 500;
+    color: grey;
+    font-size: 17px;
+}
+
+.my-account-text{
+    border: 1px solid grey;
+    width: auto;
+    padding: 10px 80px 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    
+}
+
+.my-account-header{
+    font-weight: 700;
+    font-size: 25px;
+}
+
+.my-account-container{
+    display: flex;
+}
+
+.my-dashboard{
+    margin: 10px 0px 0px 250px;
+}
+
+.my-account-dashboard{
+    font-weight: 700;
+    font-size: 25px;
+}
+
+.admin-btn{
+    width: 300px;
+    background-color: #063150;
+    color: white;
+    border: none;
+    height: 40px;
+    font-weight: 500;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 19px;
+    border-radius: 5px;
+}
+
+.admin-delete-btn{
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 900px){
+    .admin-sidebar-myaccount{
+        display: block;
+    }
+
+    .my-dashboard{
+        margin: 10px 0px 0px 10px;
+    }
+
+  
+   
+}
