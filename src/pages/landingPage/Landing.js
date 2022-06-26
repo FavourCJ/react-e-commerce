@@ -13,7 +13,8 @@ function Landing() {
         <img alt='background' src='./bgg.png' className='image'/>
         <p className='description-img'> I do not own this image</p>
       </div>
-      <div>
+      <div className='landing-product-list-section'>
+        <p className='landing-product-list-p'>Item Section <span> <a href='/all-products' className='landing-product-list-a'>View all item</a></span></p>
         <ProductListLanding/>
       </div>
       <div className='contactSection-Product'>

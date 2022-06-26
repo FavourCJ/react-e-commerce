@@ -11,7 +11,8 @@ import Register from "./pages/register/Register";
 import Login from "./login/Login";
 import MyAccount from "./pages/myAccount/MyAccount";
 import MyAccountAdmin from "./component/myAccountAdmin/MyAccountAdmin";
-import ProductListLanding from "./component/productList-landingPage/ProductListLanding";
+import AllProductListDisplay from "./pages/allProductListDisplay/AllProductListDisplay";
+import ViewItem from "./component/viewItem/ViewItem";
 
 function App() {
   const store = configureStore({
@@ -60,9 +61,11 @@ function App() {
             <MyAccountAdmin/>
           </Route>
           <Route path="/all-products">
-            <ProductListLanding/>
+            <AllProductListDisplay/>
           </Route>
-         
+          <Route path="/view-product">
+            <ViewItem/>
+          </Route>
          
           </Switch>
     </Router>

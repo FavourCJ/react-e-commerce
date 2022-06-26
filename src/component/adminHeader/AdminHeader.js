@@ -1,15 +1,21 @@
 import React from 'react'
 import "./adminHeader.css"
-import {  SettingOutlined, UserOutlined} from '@ant-design/icons';
+import { UserOutlined} from '@ant-design/icons';
+
 function AdminHeader() {
+  
   return (
     <div className='admin-header-container'>
-        <div className='admin-logo'>Favour CJ</div>
-        <div className='admin-icon'>
-            <p className='header-icon'><SettingOutlined /></p>
-            <p className='header-icon'> <UserOutlined /></p>       
-        </div>
+        <div className='admin-logo'> <a href='https://favourcj-portfolio.firebaseapp.com/' className='logo-a' target= "_blank">Favour CJ</a></div>
 
+        <div className="dropdown">
+       <button className ="dropbtn">
+    <UserOutlined className='header-icon'/>
+    </button>
+  <div className="dropdown-content">
+    <a href="my-account">My Account</a>
+  </div>
+</div>
     </div>
   )
 }

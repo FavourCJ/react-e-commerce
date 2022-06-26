@@ -7,7 +7,9 @@ function Header() {
   return (
     <div className='header-container'>
       <div className='logo-container'>
-        <a className='logo' href= "https://favourcj-portfolio.firebaseapp.com/"> FavourCJ </a>
+        <a className='logo' 
+           target= "_blank"
+           href= "https://favourcj-portfolio.firebaseapp.com/"> FavourCJ </a>
         </div>
         <button 
             className='mobile-menu-icon'
@@ -19,7 +21,7 @@ function Header() {
 
       <div className='menu-container' id ={showMenu ? "hidden": "menu-container"}>
       <div className='menu-body'>
-        <a className='menu-link' href=''> Home </a>
+        <a className='menu-link' href='/'> Home </a>
         <a className='menu-link' href='/all-products'> Products </a>
         <a className='menu-link' href=''> About Us </a>
         <a className='menu-link' href=''> Contact Us </a>

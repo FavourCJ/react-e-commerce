@@ -3,21 +3,22 @@ import { createContext } from "react";
 import { auth, db } from "../../firebase-config/firebase-config";
 import { collection, getDocs, query, where, getDoc, doc, deleteDoc, writeBatch } from "firebase/firestore";
 import { onAuthStateChanged } from 'firebase/auth';
+import {useHistory} from "react-router-dom";
+
 export const ProductContext = createContext();
 
 function ProductProvider (props){
+  var history = useHistory();
     const [ productList, setProductList] = useState([]);
     const [allProduct, setAllProduct] = useState([]);
     const [currentUserId, setCurrentUserId] = useState({});
-    const [productIndex, setProductIndex] = useState (null);
-    const [productData, setProductData] = useState ({});
     const regCollectionRef = collection(db, "registered");
     const SubcriberCollectionRef = collection(db, "subscribe");
-    const productCollectionRef = collection(db, "products");
     const[subList, setSubList] = useState ([]);
     const[regList, setRegList] = useState ([]);
     const [userDetails, setUserDetails] = useState([]);
     const batch = writeBatch(db);
+    var history = useHistory();
 
     //getting current user id
   onAuthStateChanged(auth, (currentUser) =>{
@@ -71,36 +72,24 @@ function ProductProvider (props){
         })
       }
 
+      const deleteAllUserDoc = async()=>{
+        const deleteAccounttDocs = doc (regCollectionRef, currentUserId.uid);
+        await deleteDoc (deleteAccounttDocs);
+        await batch.commit();
+      }
+
       //delete my account
       const deleteAccount = useCallback (async() =>{
-        const deleteAccounttDocs = doc (regCollectionRef, currentUserId.uid);
         const userProductRef = doc(db, "products", currentUserId.uid);
-        await deleteDoc (deleteAccounttDocs);
         batch.delete(userProductRef);
         await batch.commit();
-      })
+      });
     
-
-    //   //retrieving specific data
-    // const editProductData = async(id) =>{
-    //     const getProductDoc = doc(productCollectionRef, id);
-    //     const data = await getDoc(getProductDoc);
-    //     await getDoc(getProductDoc);
-    //     setProductIndex (productIndex => 
-    //     productIndex === id ? null : id);
-    //     const specificData = query(collection(db, "products"), where(productList.id, "==", productIndex));
-    //     const querySnapshot = await getDocs(specificData);
-    //     querySnapshot.forEach((doc) =>{
-    //       setProductData(doc.data()); 
-    //       console.log(productIndex) 
-    //     })
-    // }
-
       const allExports = {getProducts, productList, 
                           currentUserId, subList, 
                           getSubcriber, getRegisteredUsers, 
                           regList, userDetails, getCurrentUserData,
-                           deleteAccount, getAllProducts, allProduct};
+                          deleteAccount, getAllProducts, allProduct};
      
     return(
         <ProductContext.Provider value={allExports}>

@@ -37,7 +37,9 @@ export const itemValidation = (data) =>{
   if (!data.stock){
     itemError.stock = "Stock number is required"
     }else if (!/^[0-9]*$/.test(data.stock)){
-        itemError.stock = "Stock must only be numbers"
+        itemError.stock = "Stock must only be positive numbers"
+    }else if (data.stock == 0){
+        itemError.stock = "Stock must be above 0"
     }
 
     if (!data.category){
@@ -50,8 +52,14 @@ export const itemValidation = (data) =>{
 
    if (!data.price){
         itemError.price = "Price is required"
-        }else if(!data.currency){
+        }else if (!/^[0-9]*$/.test(data.price)){
+            itemError.price = "Price must only be positive numbers"
+        }
+        else if(!data.currency){
             itemError.price = "Currency is required"
+        }
+    if (!data.image){
+        itemError.image = "Please upload an image"
         }
 
         return itemError;

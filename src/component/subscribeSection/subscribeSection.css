@@ -24,6 +24,15 @@
     justify-content: center;
 }
 
+.subsuccess{
+    color: white;
+    background-color: green;
+    width: 350px;
+    height: 40px;
+    padding-top: 8px;
+    display: inline-flex;
+    justify-content: center;
+}
 .sub-btn{
     width: 150px;
     height: 40px;
@@ -33,12 +42,13 @@
     font-weight: 600;
     cursor: pointer;
     background-color: white;
-
+    margin-top: -25px;
 }
 
 .sub-btn-container{
     margin-left: 10px;
 }
+
 
 .error{
     color: red;

@@ -6,9 +6,12 @@ import { itemValidation } from '../../Validation';
 import { addDoc, collection } from 'firebase/firestore';
 import { db, auth } from '../../firebase-config/firebase-config';
 import { useHistory } from 'react-router-dom';
+import {storage} from "../../firebase-config/firebase-config"
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import AdminHeader from '../../component/adminHeader/AdminHeader';
 
 function AddItem() {
-
+     
     const[ itemData, setItemData] = useState({
         name: "",
         color: "",
@@ -18,9 +21,10 @@ function AddItem() {
         category: "",
         currency: "",
         description: "",
+        image : ""
 
     })
-
+   
     let history = useHistory();
 
     const [itemError, setItemError] = useState ({});
@@ -44,10 +48,32 @@ function AddItem() {
             
            }).then(() =>{
              alert ("done")
+             uploadItemImage();
              setSucess(true)
            })             
          } 
 
+         const uploadItemImage = () =>{
+          const imageRef = storage.ref("images");
+          console.log(imageRef)
+          // const storageRef = ref(storage,`/images/${itemData.image.name}`)
+          // const uploadTask = uploadBytesResumable(storageRef, itemData.image);
+  
+          // uploadTask.on(
+          //  "state_changed",
+          //  (snapshot) => {},
+          //  (err) => console.log(err),
+          //  () => {
+          //      // download url
+          //      getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+          //          console.log(url);
+          //          console.log(itemData.image)
+          //      });
+          //    }
+          // )
+ 
+         }
+        
          const handleAddItemSubmit = () =>{
           if (Object.keys(itemError).length === 0 && correctData){
             addItem();
@@ -65,6 +91,7 @@ function AddItem() {
     
   return (
     <div className='addItem-container'>
+      <AdminHeader/>
         <div className='addItem-sidebar-container'>
         <Sidebar/>
         <div className='addItem-content'>
@@ -201,7 +228,7 @@ function AddItem() {
              checked={itemData.category === 'Single'} 
              onChange = { e=>{
                 setItemData ({...itemData, category: e.target.value})
-              }}/>
+            }}/>
               <span className='item-radio-p'> Single</span>   
             </div>
             </div>
@@ -210,8 +237,13 @@ function AddItem() {
 
             <div className='form-data'>
             <label className='item-label'> Upload Item<span className='required'>*</span></label>
-            <input className='item-input-file' type= "file"/>
+            <input className='item-input-file' type= "file" accept="image/*"
+            onChange = { e=>{
+              setItemData ({...itemData, image: e.target.value })
+             }}/>
             </div>
+            {itemError.image && <p className='item-error'> {itemError.image}</p>}
+
 
             <div className='item-btn-container'>
                 <button className='item-btn'> Add Item</button>

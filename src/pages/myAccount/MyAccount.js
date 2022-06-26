@@ -5,7 +5,7 @@ import { ProductContext } from '../../component/contextFile/ProductContext';
 import {useHistory} from "react-router-dom"
 
 function MyAccount() {
-  const {userDetails, getCurrentUserData, deleteAccount} = useContext(ProductContext);
+  const {userDetails, getCurrentUserData, deleteAccount, currentUserId} = useContext(ProductContext);
   const history = useHistory();
   
   const redirectDeletedUser = () =>{
@@ -15,7 +15,8 @@ function MyAccount() {
 
   useEffect(() =>{
     getCurrentUserData();
-  })
+    
+  },[getCurrentUserData])
   return (
     <div className='my-account-container'>
      
