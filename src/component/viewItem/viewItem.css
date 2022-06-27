@@ -19,11 +19,21 @@
     font-weight: 500;
     font-size: 17px;
     text-transform: capitalize;
+    cursor: pointer;
 }
 
 .view-product-detail-qty{
-    width: 60px;
+    width: 40px;
+    border: 1px solid grey;
+    height: 27px;
+    text-align: center;
+    padding-top: 5px;
     margin-left: 10px;
+}
+
+.view-product-detail-description{
+    font-weight: 400;
+    text-transform: capitalize;
 }
 
 .view-product-detail{
@@ -34,4 +44,10 @@
 .view-product-detail-name{
     font-weight: 400;
     margin-left: 10px;
+}
+
+.view-item-error{
+    color: red;
+    font-weight: 500;
+    margin-top: 5px;
 }

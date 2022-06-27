@@ -21,6 +21,25 @@
     
 }
 
+.edit-success{
+    color: white;
+    font-weight: 500;
+    font-size: 20px;
+    background-color: green;
+    text-align: center;
+    padding: 10px;
+}
+
+.my-account-text-input{
+    border: 1px solid grey;
+    width: auto;
+    padding: 10px 80px 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    display: block;
+    margin-top: 10px;
+}
+
 .my-account-header{
     font-weight: 700;
     font-size: 25px;
@@ -59,6 +78,19 @@
     padding: 10px;
     margin-top: 20px;
     cursor: pointer;
+    font-weight: 16px;
+}
+
+.admin-edit-btn{
+    background-color: blue;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-top: 20px;
+    cursor: pointer;
+    margin-right: 20px;
+    width: 150px;
+    font-weight: 16px;
 }
 
 @media only screen and (max-width: 900px){

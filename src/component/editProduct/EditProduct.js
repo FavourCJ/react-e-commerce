@@ -5,14 +5,15 @@ import Footer from "../../component/footer/Footer"
 import {editItemValidation} from '../../Validation';
 import {useHistory} from "react-router-dom";
 import { ProductContext } from '../contextFile/ProductContext';
-import { collection, getDocs, query, where, getDoc, doc, deleteDoc, writeBatch, updateDoc } from "firebase/firestore";
+import { collection, getDocs, query, doc, updateDoc } from "firebase/firestore";
 import { db } from '../../firebase-config/firebase-config';
 
 function EditProduct() {
-  const {getProducts, productList} = useContext(ProductContext);
+  const {getProducts, removeLocalStorageData} = useContext(ProductContext);
     const [editError, setEditError] = useState({});
     const [specificProductId, setSpecificProductId] = useState([])
     const history = useHistory();
+    
     const localstorageData ={
       id: localStorage.getItem('id'),
       name: localStorage.getItem('name'),
@@ -41,8 +42,7 @@ function EditProduct() {
       const data = await getDocs(specificDataCollection);
       setSpecificProductId(localstorageData.id);
       const productRef = doc(db, "products", specificProductId);
-   
-      
+    
       data.forEach( async(doc) =>{
         if (doc.id === specificProductId){ 
           await updateDoc(productRef, {
@@ -55,15 +55,16 @@ function EditProduct() {
             itemCategory: editValue.category,
             ItemGender: editValue.gender,
             PriceCurrency: editValue.currency
-          });
-          history.push("/products");
+          }).then(() =>{
+            removeLocalStorageData();
+            history.push("/products");
+          })
           
         }else if (doc.id !== localstorageData.id){
           console.log("not here")
         }
       })
     }
-
 
     const handleSubmit = (e) =>{
       e.preventDefault();
@@ -72,9 +73,7 @@ function EditProduct() {
 
     useEffect(() =>{ 
       getProducts();
-    },[getProducts]);
-
-
+    },[]);
 
   return (
     <div>
@@ -232,7 +231,6 @@ function EditProduct() {
             </div>
             </div>
             {editError.category && <p className='edit-item-error-category'> {editError.category}</p>}
-
 
             <div className='item-btn-container'>
                 <button 

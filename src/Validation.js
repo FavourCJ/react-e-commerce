@@ -157,3 +157,12 @@ export const editItemValidation = (editValue) =>{
 
     return editError;
 }
+
+export const orderItem = (quantity) =>{
+    let err = {}
+
+    if(!quantity){
+        err.quantity = "Please Enter the quantity you want"
+    }
+    return err
+}

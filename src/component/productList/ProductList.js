@@ -13,33 +13,20 @@ function ProductList() {
   
   let history = useHistory();
 
-  const {getProducts, productList} = useContext(ProductContext);
+  const {getProducts, productList, setLocalStorageData} = useContext(ProductContext);
   const productCollectionRef = collection(db, "products");
   const [loadData, setLoadData] = useState (false);
   
-
-    useEffect(() =>{ 
-      getProducts();
-    },[getProducts]);
-
   //deleting specific product from list
    const deleteProduct =  async (id) =>{
     const deleteProductDocs = doc (productCollectionRef, id);
     await deleteDoc (deleteProductDocs)
 }
 
-const handle = (val) => {
-  localStorage.setItem('id', val.id)
-   localStorage.setItem('name', val.ItemName)
-   localStorage.setItem('color', val.ItemColor)
-   localStorage.setItem('price', val.ItemPrice)
-   localStorage.setItem('currency', val.PriceCurrency)
-   localStorage.setItem('description', val.itemDescription)
-   localStorage.setItem('category', val.itemCategory)
-   localStorage.setItem('gender', val.ItemGender)
-   localStorage.setItem('stock', val.AvailableStock)
-  history.push("/editProduct");
-};
+useEffect(() =>{ 
+  getProducts();
+},[getProducts]);
+
 
   return (
     <div> 
@@ -80,7 +67,8 @@ const handle = (val) => {
             <button
              className='edit-item'
              onClick={() =>{
-              handle(val)
+              setLocalStorageData(val);
+              history.push("/editProduct");
              }}
              >
               <EditOutlined/>

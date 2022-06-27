@@ -63,7 +63,8 @@ function Sidebar() {
                  <a className='sidebarMenu-link' href='/my-account-admin'>
                 <span className='menu-icon'><SettingOutlined /></span>
                 <p className='sidebarMenu-p'> Settings</p>
-                </a>   
+                </a>  
+                 
                 </div>
 
                 <div className='link-section-container'>

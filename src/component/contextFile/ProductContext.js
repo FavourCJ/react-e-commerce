@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { createContext } from "react";
 import { auth, db } from "../../firebase-config/firebase-config";
-import { collection, getDocs, query, where, getDoc, doc, deleteDoc, writeBatch } from "firebase/firestore";
+import { collection, getDocs, query, where, getDoc, doc, deleteDoc, writeBatch, updateDoc } from "firebase/firestore";
 import { onAuthStateChanged } from 'firebase/auth';
 import {useHistory} from "react-router-dom";
 
@@ -72,6 +72,32 @@ function ProductProvider (props){
         })
       }
 
+      const setLocalStorageData = (val) => {
+        localStorage.setItem('id', val.id)
+         localStorage.setItem('name', val.ItemName)
+         localStorage.setItem('color', val.ItemColor)
+         localStorage.setItem('price', val.ItemPrice)
+         localStorage.setItem('currency', val.PriceCurrency)
+         localStorage.setItem('description', val.itemDescription)
+         localStorage.setItem('category', val.itemCategory)
+         localStorage.setItem('gender', val.ItemGender)
+         localStorage.setItem('stock', val.AvailableStock)
+        
+      };
+
+      const removeLocalStorageData = () => {
+        localStorage.removeItem('id')
+        localStorage.removeItem('name')
+        localStorage.removeItem('color')
+        localStorage.removeItem('gender')
+        localStorage.removeItem('category')
+        localStorage.removeItem('description')
+        localStorage.removeItem('price')
+        localStorage.removeItem('currency')
+        localStorage.removeItem('stock')
+        
+      };
+
       const deleteAllUserDoc = async()=>{
         const deleteAccounttDocs = doc (regCollectionRef, currentUserId.uid);
         await deleteDoc (deleteAccounttDocs);
@@ -89,7 +115,8 @@ function ProductProvider (props){
                           currentUserId, subList, 
                           getSubcriber, getRegisteredUsers, 
                           regList, userDetails, getCurrentUserData,
-                          deleteAccount, getAllProducts, allProduct};
+                          deleteAccount, getAllProducts, allProduct, 
+                          setLocalStorageData, removeLocalStorageData};
      
     return(
         <ProductContext.Provider value={allExports}>

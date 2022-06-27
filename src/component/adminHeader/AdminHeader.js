@@ -1,6 +1,6 @@
 import React from 'react'
 import "./adminHeader.css"
-import { UserOutlined} from '@ant-design/icons';
+import {UserOutlined} from '@ant-design/icons';
 
 function AdminHeader() {
   
@@ -10,10 +10,10 @@ function AdminHeader() {
 
         <div className="dropdown">
        <button className ="dropbtn">
-    <UserOutlined className='header-icon'/>
+      <UserOutlined className='header-icon'/>
     </button>
   <div className="dropdown-content">
-    <a href="my-account">My Account</a>
+    <a href="my-account-admin">My Account</a>
   </div>
 </div>
     </div>
