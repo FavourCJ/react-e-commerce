@@ -13,6 +13,9 @@ import MyAccount from "./pages/myAccount/MyAccount";
 import MyAccountAdmin from "./component/myAccountAdmin/MyAccountAdmin";
 import AllProductListDisplay from "./pages/allProductListDisplay/AllProductListDisplay";
 import ViewItem from "./component/viewItem/ViewItem";
+import PrivateRoute from "./component/privateRoute/PrivateRoute";
+import { useContext, useEffect } from "react";
+import { ProductContext } from "./component/contextFile/ProductContext";
 
 function App() {
   const store = configureStore({
@@ -20,54 +23,41 @@ function App() {
       product: productReducer,
     }
   });
-  
+  const {isLoggedIn, authUser} = useContext(ProductContext);
+ 
+  useEffect(() =>{
+    authUser();
+  },[])
+
   return (
     <Provider store = {store}>
     <div className="App">
      <div className="app-content">
      <Router>
-      <Switch>
+     <Switch>
       <Route exact path="/">
           <Landing/>
           </Route>
-        <Route exact path="/register">
+
+          <Route path="/login">
+          <Login/>
+          </Route>
+        
+          <Route path="/register">
           <Register/>
           </Route>
-          <Route path="/admin">
-            <AdminHome/>
-          </Route>
-          <Route path="/addItem">
-            <AddItem />
-          </Route>
-          <Route path="/products">
-            <ProductList />
-          </Route>
-          <Route path="/editProduct">
-            <EditProduct />
-          </Route>
-          <Route path="/register">
-            <Register />
-          </Route>
-          <Route path="/landing">
-            <Landing />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/my-account">
-            <MyAccount/>
-          </Route>
-          <Route path="/my-account-admin">
-            <MyAccountAdmin/>
-          </Route>
-          <Route path="/all-products">
-            <AllProductListDisplay/>
-          </Route>
-          <Route path="/view-product">
-            <ViewItem/>
-          </Route>
          
-          </Switch>
+         <PrivateRoute isAuth={isLoggedIn} path = "/admin" component={AdminHome}/>
+         <PrivateRoute isAuth={isLoggedIn} path = "/addItem" component={AddItem}/>
+         <PrivateRoute isAuth={isLoggedIn} path = "/products" component={ProductList}/>
+         <PrivateRoute isAuth={isLoggedIn} path = "/editProduct" component={EditProduct}/>
+         <PrivateRoute isAuth={isLoggedIn} path = "/all-products" component={AllProductListDisplay}/>
+         <PrivateRoute isAuth={isLoggedIn} path = "/my-account-admin" component={MyAccountAdmin}/>
+         <PrivateRoute isAuth={isLoggedIn} path = "/view-product" component={ViewItem}/>
+         <PrivateRoute isAuth={isLoggedIn} path = "/my-account" component={MyAccount}/>
+          
+        </Switch>
+       
     </Router>
    
      </div>

@@ -7,7 +7,6 @@ import { addDoc, collection } from 'firebase/firestore';
 import { db, auth } from '../../firebase-config/firebase-config';
 import { useHistory } from 'react-router-dom';
 import {storage} from "../../firebase-config/firebase-config"
-import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import AdminHeader from '../../component/adminHeader/AdminHeader';
 
 function AddItem() {

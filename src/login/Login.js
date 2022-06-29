@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import "./login.css"
 import { Grid, Paper } from "@material-ui/core";
 import { loginValidation } from '../Validation';
@@ -6,9 +6,11 @@ import { useHistory } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import {auth, db} from "../firebase-config/firebase-config";
 import { collection, getDocs, query, where } from 'firebase/firestore';
+import { ProductContext } from '../component/contextFile/ProductContext';
 
  function Login() {  
-    
+
+     const {isLoggedIn, authUser} = useContext(ProductContext);
      const [logError, setLogError] = useState ({});
      const [correctData, setCorrectData] = useState (false);
      const [loggedUserDetails, setLoggedUserDetails] = useState ({});
@@ -20,6 +22,20 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
         password: ""
     })
 
+    //Navigating current user based on there category (admin or customer)
+    const navigateLoggedUser = async () =>{
+      const specificData = query(collection(db, "registered"), where("uid", "==", auth.currentUser.uid));
+      const querySnapshot = await getDocs(specificData);
+      querySnapshot.forEach((doc) => {
+          setLoggedUserDetails(doc.data()); 
+          if (loggedUserDetails.category == "Customer"){
+            history.push("/");
+          }else if(loggedUserDetails.category == "Admin"){
+            history.push("/admin")
+          }
+        });
+  }
+
     // Navigating user to their account, based on user's input
     const logInWithEmailAndPassword = async () => {
         try {
@@ -30,6 +46,7 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
             ).then (() =>{            
             //calling logged user's navigation function
               navigateLoggedUser();
+              //authUser();
               console.log("user has been logged in")
             })   
         } catch (err) {
@@ -43,20 +60,6 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
         }
     };
      
-    //Navigating current user based on there category (admin or customer)
-        const navigateLoggedUser = async () =>{
-            const specificData = query(collection(db, "registered"), where("uid", "==", auth.currentUser.uid));
-            const querySnapshot = await getDocs(specificData);
-            querySnapshot.forEach((doc) => {
-                setLoggedUserDetails(doc.data()); 
-                if (loggedUserDetails.category == "Customer"){
-                  history.push("/home");
-                }else if(loggedUserDetails.category == "Admin"){
-                  history.push("/admin")
-                }
-              });
-        }
-
      const handleSubmit =(e) =>{
          e.preventDefault();
          setLogError(loginValidation(regValue))

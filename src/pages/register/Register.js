@@ -1,12 +1,14 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useContext, useState } from 'react'
 import "./register.css"
 import {registerValidation} from "../../Validation"
 import { auth, db } from '../../firebase-config/firebase-config';
 import {doc, setDoc} from "firebase/firestore"
 import {createUserWithEmailAndPassword} from "firebase/auth";
 import { useHistory } from 'react-router-dom';
+import { ProductContext } from '../../component/contextFile/ProductContext';
 function Register() {
 
+  const {isLoggedIn, authUser} = useContext(ProductContext);
   const [formValue, setFormValue] = useState ({
     fname: "",
     lname: "",
@@ -39,9 +41,10 @@ function Register() {
         category: formValue.category,
       }).then(() =>{
         setRedirect(true);
+        //authUser();
         setTimeout(() =>{
           if (formValue.category == "Customer"){
-            history.push("/home")
+            history.push("/")
           }else if (formValue.category == "Admin"){
             history.push("/admin")
           }  

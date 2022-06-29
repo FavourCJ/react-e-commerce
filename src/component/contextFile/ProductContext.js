@@ -1,14 +1,13 @@
 import { useCallback, useState } from "react";
 import { createContext } from "react";
 import { auth, db } from "../../firebase-config/firebase-config";
-import { collection, getDocs, query, where, getDoc, doc, deleteDoc, writeBatch, updateDoc } from "firebase/firestore";
+import { collection, getDocs, query, where, doc, deleteDoc, writeBatch } from "firebase/firestore";
 import { onAuthStateChanged } from 'firebase/auth';
-import {useHistory} from "react-router-dom";
 
 export const ProductContext = createContext();
 
 function ProductProvider (props){
-  var history = useHistory();
+
     const [ productList, setProductList] = useState([]);
     const [allProduct, setAllProduct] = useState([]);
     const [currentUserId, setCurrentUserId] = useState({});
@@ -16,20 +15,28 @@ function ProductProvider (props){
     const SubcriberCollectionRef = collection(db, "subscribe");
     const[subList, setSubList] = useState ([]);
     const[regList, setRegList] = useState ([]);
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [userDetails, setUserDetails] = useState([]);
     const batch = writeBatch(db);
-    var history = useHistory();
-
+   
     //getting current user id
-  onAuthStateChanged(auth, (currentUser) =>{
-    setCurrentUserId(currentUser)
-  });
-
+    const authUser = () =>{
+      onAuthStateChanged(auth, (currentUser) =>{
+        setCurrentUserId(currentUser);
+        if (currentUser){
+          setIsLoggedIn(true);
+        }else if (!currentUser){
+          setIsLoggedIn(false);
+        }
+      });
+    
+    }
+ 
     //retreiving specific product list
     const getProducts = async()=>{
         const specificDataCollection = query(collection(db, "products"), where("uid", "==", currentUserId.uid));
-        const data = await getDocs(specificDataCollection);
-        data.forEach((doc) =>{
+        const data =  await getDocs(specificDataCollection);
+         data.forEach((doc) =>{
           setProductList (data.docs.map((doc) =>({
             ...doc.data(), id: doc.id
           })))
@@ -116,7 +123,8 @@ function ProductProvider (props){
                           getSubcriber, getRegisteredUsers, 
                           regList, userDetails, getCurrentUserData,
                           deleteAccount, getAllProducts, allProduct, 
-                          setLocalStorageData, removeLocalStorageData};
+                          setLocalStorageData, removeLocalStorageData,
+                          isLoggedIn, authUser};
      
     return(
         <ProductContext.Provider value={allExports}>

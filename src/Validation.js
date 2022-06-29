@@ -163,6 +163,8 @@ export const orderItem = (quantity) =>{
 
     if(!quantity){
         err.quantity = "Please Enter the quantity you want"
+    }else if(quantity < 1){
+        err.quantity = "Quantity should be atleast 1"
     }
     return err
 }

@@ -30,6 +30,30 @@
     font-style: italic;
 }
 
+.project-progress{
+    text-align: center;
+    margin-top: 30px;
+    font-weight: 500;
+    font-size: 20px;
+    background-color: rgb(125, 21, 21);
+    color: white;
+    width: 540px;
+    margin-left: 350px;
+    padding: 10px;
+}
+
+.project-bar{
+    margin-left: 20px;
+    height: 30px;
+    margin-top: 0px;
+}
+
+.progress-span{
+    margin-left: 10px;
+    font-weight: 400;
+    display: inline-flex;
+}
+
 @media only screen and (max-width: 900px){
     .image{
         width: 50vh;

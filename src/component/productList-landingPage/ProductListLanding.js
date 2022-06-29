@@ -1,13 +1,16 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import "./productListLanding.css";
 import { ProductContext } from '../contextFile/ProductContext';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import "./productListLanding.css"
+import "./productListLanding.css";
+import {useHistory} from "react-router-dom";
+
 
 function ProductListLanding() {
 
-  const {getAllProducts, allProduct, getSpecificProduct} = useContext(ProductContext);
+  const {getAllProducts, allProduct, setLocalStorageData} = useContext(ProductContext);
+  const history = useHistory();
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -37,14 +40,18 @@ function ProductListLanding() {
       <Carousel responsive={responsive}>
       {allProduct.map( (val, key ) => (  
         <div className='product-landing-main-div'>
-        <div className='sub-div' key={key}>
-        <div className='product-list-landing-detail-container'> 
+        <div className='sub-div'>
+        <div className='product-list-landing-detail-container'  key={val.id}> 
          <div className='product-list-img-container'> <img src = "/portrait.png" alt = "Productimage" className='landing-product-img'/> </div>
           <p className='product-list-detail-p'> Name: <span className='product-list-detail-span'>{val.ItemName}</span></p>
             <p className='product-list-detail-p'> Price: <span className='product-list-detail-span'>{val.PriceCurrency} {val.ItemPrice}</span></p>
             <p className='product-list-detail-p'> Available stock:<span className='product-list-detail-span'>{val.AvailableStock}</span></p>
             <div className='view-order-item-btn'> 
-            <button className='view-item' onClick={()=>{getSpecificProduct(val)}}>View Product</button>    
+            <button className='view-item'  
+                onClick={()=>{
+                  setLocalStorageData(val);
+                history.push("/view-product");
+                window. location. reload(false);}}>View Product</button>    
         </div>         
         </div> 
         </div> 

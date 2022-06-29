@@ -5,7 +5,10 @@ import "./adminHome.css"
 import ChartSection from '../../component/adminSection/ChartSection'
 import UserDummyList from '../../component/adminSection/UserDummyList'
 import AdminHeader from '../../component/adminHeader/AdminHeader'
+import { withRouter} from "react-router-dom"
+
 function AdminHome() {
+
   return (
     <> 
     <div className='admin-header'>
@@ -31,4 +34,4 @@ function AdminHome() {
   )
 }
 
-export default AdminHome
+export default withRouter (AdminHome)
