@@ -17,6 +17,12 @@ function ProductProvider (props){
     const[regList, setRegList] = useState ([]);
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [userDetails, setUserDetails] = useState([]);
+    const [female, setFemale] = useState([]);
+    const [male, setMale] = useState([]);
+    const [other, setOther] = useState([]);
+    const [cartArray, setCartArray] = useState([]);
+    const [wishListArray, setWishListArray] = useState([]);
+    
     const batch = writeBatch(db);
    
     //getting current user id
@@ -25,22 +31,25 @@ function ProductProvider (props){
         setCurrentUserId(currentUser);
         if (currentUser){
           setIsLoggedIn(true);
+          localStorage.setItem('loggedUser', true)
         }else if (!currentUser){
           setIsLoggedIn(false);
+          localStorage.setItem('loggedUser', false)
         }
       });
     
     }
- 
+
     //retreiving specific product list
     const getProducts = async()=>{
-        const specificDataCollection = query(collection(db, "products"), where("uid", "==", currentUserId.uid));
-        const data =  await getDocs(specificDataCollection);
-         data.forEach((doc) =>{
-          setProductList (data.docs.map((doc) =>({
-            ...doc.data(), id: doc.id
-          })))
-        })
+        
+          const specificDataCollection = query(collection(db, "products"), where("uid", "==", currentUserId.uid));
+          const data =  await getDocs(specificDataCollection);
+           data.forEach((doc) =>{
+            setProductList (data.docs.map((doc) =>({
+              ...doc.data(), id: doc.id
+            })))
+          })     
       }
 
       //get subscribers
@@ -79,31 +88,128 @@ function ProductProvider (props){
         })
       }
 
+      const getWomenCollection = async()=>{
+        const specificDataCollection = query(collection(db, "products"), where("ItemGender", "==", "Female"));
+        const data = await getDocs(specificDataCollection);
+        data.forEach((doc) =>{
+          setFemale (data.docs.map((doc) =>({
+            ...doc.data(), id: doc.id
+          })))
+        })
+      }
+
+      const getMaleCollection = async()=>{
+        const specificDataCollection = query(collection(db, "products"), where("ItemGender", "==", "Male"));
+        const data = await getDocs(specificDataCollection);
+        data.forEach((doc) =>{
+          setMale (data.docs.map((doc) =>({
+            ...doc.data(), id: doc.id
+          })))
+        })
+      }
+
+      const getOtherCollection = async()=>{
+        const specificDataCollection = query(collection(db, "products"), where("ItemGender", "==", "Other"));
+        const data = await getDocs(specificDataCollection);
+        data.forEach((doc) =>{
+          setOther (data.docs.map((doc) =>({
+            ...doc.data(), id: doc.id
+          })))
+        })
+      }
+
       const setLocalStorageData = (val) => {
-        localStorage.setItem('id', val.id)
-         localStorage.setItem('name', val.ItemName)
-         localStorage.setItem('color', val.ItemColor)
-         localStorage.setItem('price', val.ItemPrice)
-         localStorage.setItem('currency', val.PriceCurrency)
-         localStorage.setItem('description', val.itemDescription)
-         localStorage.setItem('category', val.itemCategory)
-         localStorage.setItem('gender', val.ItemGender)
-         localStorage.setItem('stock', val.AvailableStock)
+        const setSpecificData = {
+          id: val.id,
+          name: val.ItemName,
+          color: val.ItemColor,
+          price: val.ItemPrice,
+          currency:  val.PriceCurrency,
+          category: val.itemCategory,
+          gender: val.ItemGender,
+          stock:  val.AvailableStock,
+          description: val.itemDescription
+        }
+
+        localStorage.setItem("product-data", JSON.stringify(setSpecificData));      
+      };
+
+      const removeLocalStorageData = (val) => {
+        const setSpecificData = {
+          id: val.id,
+          name: val.ItemName,
+          color: val.ItemColor,
+          price: val.ItemPrice,
+          currency:  val.PriceCurrency,
+          category: val.itemCategory,
+          gender: val.ItemGender,
+          stock:  val.AvailableStock,
+          description: val.itemDescription
+        }
+        localStorage.getItem("product-data", JSON.stringify(setSpecificData)); 
         
       };
 
-      const removeLocalStorageData = () => {
-        localStorage.removeItem('id')
-        localStorage.removeItem('name')
-        localStorage.removeItem('color')
-        localStorage.removeItem('gender')
-        localStorage.removeItem('category')
-        localStorage.removeItem('description')
-        localStorage.removeItem('price')
-        localStorage.removeItem('currency')
-        localStorage.removeItem('stock')
-        
-      };
+      
+  const saveCartArrayProduct = (val) =>{
+    var products = JSON.parse(localStorage.getItem("product-array") || "[]");
+    const setSpecificData = {
+      id: val.id,
+      name: val.ItemName,
+      color: val.ItemColor,
+      price: val.ItemPrice,
+      currency:  val.PriceCurrency,
+      category: val.itemCategory,
+      gender: val.ItemGender,
+      stock:  val.AvailableStock,
+      description: val.itemDescription
+    }
+    products.push(setSpecificData)
+     localStorage.setItem("product-array", JSON.stringify(products));
+ 
+  }
+
+  //save wishlist
+  const saveArrayWishListProduct = (val) =>{
+    var products = JSON.parse(localStorage.getItem("wishlist-array") || "[]");
+    const setSpecificData = {
+      id: val.id,
+      name: val.ItemName,
+      color: val.ItemColor,
+      price: val.ItemPrice,
+      currency:  val.PriceCurrency,
+      category: val.itemCategory,
+      gender: val.ItemGender,
+      stock:  val.AvailableStock,
+      description: val.itemDescription
+    }
+    products.push(setSpecificData)
+     localStorage.setItem("wishlist-array", JSON.stringify(products));
+  }
+
+  //get Wish List in local storage
+  const getWishList = ()=>{
+    setWishListArray(JSON.parse(localStorage.getItem("wishlist-array")));
+  }
+
+  const getCartArray = () =>{
+    setCartArray(JSON.parse(localStorage.getItem("product-array")));
+  }
+
+  const removeSavedDataArray = (val) =>{
+    const setSpecificData = {
+      id: val.id,
+      name: val.name,
+      price: val.price,
+      currency:  val.currency,
+    }
+
+    
+    console.log (setSpecificData)
+     const hi = localStorage.getItem('product-array')
+     console.log(hi)
+    //JSON.parse(localStorage.removeItem("product-array", setSpecificData))
+  }
 
       const deleteAllUserDoc = async()=>{
         const deleteAccounttDocs = doc (regCollectionRef, currentUserId.uid);
@@ -124,7 +230,11 @@ function ProductProvider (props){
                           regList, userDetails, getCurrentUserData,
                           deleteAccount, getAllProducts, allProduct, 
                           setLocalStorageData, removeLocalStorageData,
-                          isLoggedIn, authUser};
+                          isLoggedIn, authUser, getWomenCollection,
+                          female, getMaleCollection, male, getOtherCollection,
+                           other, saveCartArrayProduct, getCartArray, cartArray,
+                           removeSavedDataArray, saveArrayWishListProduct, wishListArray,
+                           getWishList,};
      
     return(
         <ProductContext.Provider value={allExports}>

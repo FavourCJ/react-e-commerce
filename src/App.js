@@ -1,33 +1,32 @@
-import Landing from "./pages/landingPage/Landing";
-import AdminHome from "./pages/adminPage/AdminHome";
+
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
-import AddItem from "./pages/addItem/AddItem";
-import ProductList from "./component/productList/ProductList";
-import EditProduct from "./component/editProduct/EditProduct";
 import {configureStore} from "@reduxjs/toolkit";
 import { Provider } from 'react-redux';
 import productReducer from "./redux-features/Product";
 import Register from "./pages/register/Register";
-import Login from "./login/Login";
-import MyAccount from "./pages/myAccount/MyAccount";
-import MyAccountAdmin from "./component/myAccountAdmin/MyAccountAdmin";
-import AllProductListDisplay from "./pages/allProductListDisplay/AllProductListDisplay";
-import ViewItem from "./component/viewItem/ViewItem";
 import PrivateRoute from "./component/privateRoute/PrivateRoute";
-import { useContext, useEffect } from "react";
-import { ProductContext } from "./component/contextFile/ProductContext";
-
+import MyAccountAdmin from "./pages/adminContainer/myAccountAdmin/MyAccountAdmin";
+import ProductList from "./pages/adminContainer/productList/ProductList";
+import AllProductListDisplay from "./pages/customerContainer/allProductListDisplay/AllProductListDisplay"
+import AddItem from "./pages/adminContainer/addItem/AddItem"
+import Landing from "./pages/landingPage/Landing";
+import AdminHome from "./pages/adminContainer/adminPage/AdminHome";
+import EditProduct from "./pages/adminContainer/editProduct/EditProduct";
+import ViewItem from "./pages/customerContainer/viewItem/ViewItem";
+import CustomerAccount from "./pages/customerContainer/customerAccount/CustomerAccount";
+import Login from "./pages/login/Login";
+import CustomerHome from "./pages/customerContainer/customerHome/CustomerHome";
+import FemaleCollection from "./pages/womenCollection/WomenCollection";
+import MaleCollection from "./pages/maleCollection/MaleCollection";
+import OtherCollection from "./pages/OtherCollection/OtherCollection"
+import AddToCart from "./pages/customerContainer/addToCart/AddToCart";
 function App() {
   const store = configureStore({
     reducer: {
       product: productReducer,
     }
   });
-  const {isLoggedIn, authUser} = useContext(ProductContext);
- 
-  useEffect(() =>{
-    authUser();
-  },[])
+
 
   return (
     <Provider store = {store}>
@@ -46,15 +45,33 @@ function App() {
           <Route path="/register">
           <Register/>
           </Route>
+
+          <Route path="/all-products">
+          <AllProductListDisplay/>
+          </Route>
+
+          <Route path="/female-collection">
+          <FemaleCollection/>
+          </Route>
+
+          <Route path="/male-collection">
+          <MaleCollection/>
+          </Route>
+
+          <Route path="/other-collection">
+          <OtherCollection/>
+          </Route>
+          
+          <PrivateRoute path = "/admin" component={AdminHome}/>
+          <PrivateRoute path = "/my-account" component={CustomerAccount}/>
+          <PrivateRoute path = "/my-account-admin" component={MyAccountAdmin}/>
+          <PrivateRoute path = "/editProduct" component={EditProduct}/>
+          <PrivateRoute path = "/products" component={ProductList}/>
+          <PrivateRoute path = "/addItem" component={AddItem}/>
+          <PrivateRoute path="/view-product" component={ViewItem} />
+          <PrivateRoute path="/home" component={CustomerHome} />
+          <PrivateRoute path="/add-to-cart" component={AddToCart} />
          
-         <PrivateRoute isAuth={isLoggedIn} path = "/admin" component={AdminHome}/>
-         <PrivateRoute isAuth={isLoggedIn} path = "/addItem" component={AddItem}/>
-         <PrivateRoute isAuth={isLoggedIn} path = "/products" component={ProductList}/>
-         <PrivateRoute isAuth={isLoggedIn} path = "/editProduct" component={EditProduct}/>
-         <PrivateRoute isAuth={isLoggedIn} path = "/all-products" component={AllProductListDisplay}/>
-         <PrivateRoute isAuth={isLoggedIn} path = "/my-account-admin" component={MyAccountAdmin}/>
-         <PrivateRoute isAuth={isLoggedIn} path = "/view-product" component={ViewItem}/>
-         <PrivateRoute isAuth={isLoggedIn} path = "/my-account" component={MyAccount}/>
           
         </Switch>
        

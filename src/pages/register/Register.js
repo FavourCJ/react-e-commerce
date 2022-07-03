@@ -1,14 +1,13 @@
-import React, { useCallback, useContext, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import "./register.css"
 import {registerValidation} from "../../Validation"
 import { auth, db } from '../../firebase-config/firebase-config';
 import {doc, setDoc} from "firebase/firestore"
 import {createUserWithEmailAndPassword} from "firebase/auth";
 import { useHistory } from 'react-router-dom';
-import { ProductContext } from '../../component/contextFile/ProductContext';
+
 function Register() {
 
-  const {isLoggedIn, authUser} = useContext(ProductContext);
   const [formValue, setFormValue] = useState ({
     fname: "",
     lname: "",
@@ -23,6 +22,8 @@ function Register() {
   const [regError, setRegError] = useState ({});
   const [redirect, setRedirect] = useState(false);
   const [userExist, setUserExist] = useState (false);
+  const [loadData, setLoadData] = useState (false);
+ 
  
   //inserting data to firestore database
   const registerAuth = useCallback( async() =>{  
@@ -32,6 +33,7 @@ function Register() {
         formValue.email,
         formValue.password,
         )
+        setLoadData(true)
    //Giving the same user id in auth to that of firestore database
       await setDoc(doc(db, 'registered', user.uid), {
         email: user.email,
@@ -41,14 +43,12 @@ function Register() {
         category: formValue.category,
       }).then(() =>{
         setRedirect(true);
-        //authUser();
-        setTimeout(() =>{
-          if (formValue.category == "Customer"){
+        setLoadData(false)
+          if (formValue.category === "Customer"){
             history.push("/")
-          }else if (formValue.category == "Admin"){
+          }else if (formValue.category === "Admin"){
             history.push("/admin")
-          }  
-        }, 3000)            
+          }             
       })
                     
     } catch (err) {
@@ -68,7 +68,6 @@ function Register() {
     e.preventDefault();
     setRegError(registerValidation(formValue));
     setCorrectData (true);
-    // registerAuth();
     handleAddUser();
   }
   
@@ -148,9 +147,11 @@ function Register() {
             }}
           /> Customer
           {regError.category && <p className='reg-error-category'> {regError.category}</p>}
-          <button className='reg-btn' disabled={redirect}> 
-          <span>{redirect ? <span className='reg-txt'> Redirecting... <div className="loader"> </div></span> : <span> Register</span>}</span>
+
+          <button className='reg-btn' disabled ={redirect}>
+           <span>{loadData ? <span className='reg-txt'> Redirecting... <div className="loader"> </div></span> : <span> Register</span>}</span>
            </button>
+ 
           <p className='has-account'>Already have an account? <a href='/login'>Login</a></p>
       </form>
   </div>

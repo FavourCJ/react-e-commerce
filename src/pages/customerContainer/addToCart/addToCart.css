@@ -1,0 +1,37 @@
+.product-array-table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+    margin-left: 270px;
+  }
+  
+  .product-array-td, 
+  .product-array-th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 20px 20px 20px 20px;
+  }
+
+  .product-array-td-delete{
+    color: red;
+    text-align: center;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    font-size: 17px;
+  }
+
+  .product-array-total{
+    font-size: 17px;
+    font-weight: 500;
+   text-align: right;
+   margin-right: 600px;
+  }
+
+  .productArrayList-h1{
+    text-align: center;
+    font-size: 25px;
+    color: red;
+  }
+  
+  

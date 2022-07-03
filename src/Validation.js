@@ -159,12 +159,15 @@ export const editItemValidation = (editValue) =>{
 }
 
 export const orderItem = (quantity) =>{
+    const getLocalstorageData = JSON.parse(localStorage.getItem("product-data"));
     let err = {}
 
     if(!quantity){
-        err.quantity = "Please Enter the quantity you want"
+        err.quantity = "Please Enter the quantity you want to order"
     }else if(quantity < 1){
         err.quantity = "Quantity should be atleast 1"
+    }else if (getLocalstorageData.stock < quantity){
+        err.quantity = "We do not have enough stock for your purchase"
     }
     return err
 }

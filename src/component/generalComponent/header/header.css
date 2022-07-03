@@ -1,0 +1,279 @@
+.menu-link{
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+    margin-right: 30px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.menu-link:hover{
+    color: #29526f;
+    font-weight: 700;
+}
+
+.logo{
+    text-decoration: none;
+    font-weight: 700;
+    color: #29526f;
+    font-size: 25px;
+}
+
+#hide-login-signUp{
+    display: none;
+}
+
+#show-avater {
+    display: inline-flex;
+}
+
+#hide-avater{
+    display: none;
+}
+
+#hide-search{
+    display: none;
+}
+
+
+
+.logo-container{
+    margin: 33px 0px 60px -150px;
+}
+
+.top-menu-link{
+    text-decoration: none;
+    margin-left: 20px;
+    color: white;
+    font-size: 20px;
+}
+
+.top-menu-container{
+    padding: 5px 30px 5px;
+    text-align: right;
+    background-color: black;
+}
+
+.logo-menu-link-container{
+    display: flex;
+    justify-content: center;
+    
+}
+
+.dropdown-menu-link{
+    text-decoration: none;
+    color: black;
+    font-size: 17px;
+}
+
+
+.dropdown-menu-content {
+  display: none;
+  position: absolute;
+  background-color: whitesmoke;
+  min-width: 260px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+
+}
+
+
+.dropdown-menu-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+
+  }
+  
+  .dropdown-menu-content a:hover {background-color: #ddd;}
+  .dropdown:hover .dropdown-menu-content {display: block;}
+  
+.login{
+    text-decoration: none;
+    color: #29526f;
+    border: 1px solid #29526f;
+    padding: 7px 30px;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.login:hover{
+    color: white;
+    background-color: #29526f;
+   
+}
+
+.signUp{
+    text-decoration: none;
+    background-color: #29526f;
+    color: white;
+    padding: 7px 30px;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 18px;
+    margin-left: 20px;
+}
+
+.signUp:hover{
+    background-color: #194564;
+}
+
+
+.mobile-menu-icon{
+    display: none;
+}
+
+.menu-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-left: 60px;
+}
+
+.wishlist-cart-search-container{
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 30px;
+    margin-left: 60px;
+    margin-right: -190px;
+}
+
+.heart-icon{
+    text-decoration: none;
+    font-size: 30px;
+    cursor: pointer;
+  
+}
+
+.heart-icon-num{
+    position: relative;
+    top: -20px;
+    color: white;
+    background-color: rgb(255, 0, 0);
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.search-bar-input{
+    height: 40px;
+    width: 550px;
+    font-size: 17px;
+    font-weight: 500;
+    border: 1px solid black;
+    
+}
+
+.search-bar-container{
+    display: flex;
+    justify-content: center;
+    background-color: #29526f;
+    padding: 20px;
+}
+
+.search-bar-btn{
+    background-color: white;
+    color: #29526f;
+    border: 1px solid black;
+    height: 43px;
+    width: 50px;
+    font-size: 17px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.whishlist-container{
+    display: flex;
+    margin-right: 10px;
+}
+
+.cart-icon{
+    text-decoration: none;
+    font-size: 30px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.search-icon{
+    font-size: 30px;
+    margin-left: 10px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    margin-top: -45px;
+}
+
+.cart-container{
+    display: flex;
+    margin-right: 30px;
+}
+
+@media only screen and (max-width: 900px){
+    .mobile-menu-icon{
+        background-color: transparent;
+        border: none;
+        font-size: 20px;
+        margin-left: 10px;
+        cursor: pointer;
+        display: flex;
+    }
+
+    .menu-container{
+        display: none;
+    }
+
+    .menu-link{
+        display: block;
+        margin-top: 15px;
+        color: white;
+    }
+
+    #hidden{
+        display: block;
+        margin: 10px 20px;
+        background-color: #29526f;
+        padding: 5px 20px;
+        height:  70vh;
+        padding-bottom: 20px;
+        
+    }
+
+    .login{
+        color: white;
+        position: relative;
+        margin-left: 2px;
+        top: 20px;
+        font-size: 20px;
+        border: none;
+        left: -30px;
+    }
+
+    .signUp{
+        position: relative;
+        display: block; 
+        top: 34px;
+        left: -50px;
+        font-size: 20px;
+        background-color: transparent;   
+    }
+
+    .signUp:hover,
+    .login:hover{
+        background-color: transparent;
+        color: rgb(240, 235, 235);
+    }
+
+    .menu-link:hover{
+        color: rgb(240, 235, 235);
+
+    }
+
+ 
+}
+
+
+
+

@@ -1,0 +1,76 @@
+.customer-header-body-container{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #29526f;
+    padding-top: 30px;
+}
+
+.wishlist-cart-container{
+    display: flex;
+}
+
+.customer-header-logo-link{
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 25px;
+}
+
+.search-bar{
+    height: 40px;
+    width: 350px;
+    border: none;
+    font-size: 17px;
+    font-weight: 500;
+    padding-left: 10px;
+    outline: #29526f;
+}
+
+.search-bar-container{
+    display: flex;
+}
+
+.search-bar-btn{
+    background-color: white;
+    color: #29526f;
+    border: 1px solid black;
+    height: 43px;
+    width: 50px;
+    font-size: 17px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.whishlist-container{
+    display: flex;
+}
+
+.heart-icon{
+    text-decoration: none;
+    color: whitesmoke;
+    font-size: 30px;
+  
+}
+
+.heart-icon-num{
+    position: relative;
+    top: -20px;
+    color: white;
+    background-color: rgb(255, 0, 0);
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.cart-icon{
+    text-decoration: none;
+    color: whitesmoke;
+    font-size: 30px;
+    margin-left: 10px;
+}
+
+.cart-container{
+    display: flex;
+}
