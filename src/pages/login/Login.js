@@ -7,17 +7,19 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import {auth, db} from "../../firebase-config/firebase-config";
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { ProductContext } from '../../component/contextFile/ProductContext';
+import {useLocation} from "react-router-dom"
 
  function Login() {  
 
-  const {authUser} = useContext(ProductContext);
+     const { authUser} = useContext(ProductContext);
      const [logError, setLogError] = useState ({});
      const [correctData, setCorrectData] = useState (false);
      const [authError, setAuthError] = useState (false);
      const [redirect, setRedirect] = useState(false);
      const [loadData, setLoadData] = useState (false);
-    
-     let history = useHistory();
+     const location = useLocation();
+     const history = useHistory();
+     const from = location.state?.from?.path || "/login";
      const [regValue, setRegValue] = useState ({
         email: "",
         password: ""
@@ -28,9 +30,11 @@ import { ProductContext } from '../../component/contextFile/ProductContext';
       const specificData = query(collection(db, "registered"), where("uid", "==", auth.currentUser.uid));
       const querySnapshot = await getDocs(specificData);
       querySnapshot.forEach((doc) => {
-          if (doc.data().category == "Customer"){
+          if (doc.data().category === "Customer"){
+            localStorage.setItem('category',"Customer")        
             history.push("/");
-          }else if(doc.data().category == "Admin"){
+          }else if(doc.data().category === "Admin"){
+            localStorage.setItem('category', "Admin");       
             history.push("/admin")
           }
         });
@@ -46,7 +50,7 @@ import { ProductContext } from '../../component/contextFile/ProductContext';
             ).then(() =>{
               setRedirect(true);
               setLoadData(true);
-              navigateLoggedUser();          
+              navigateLoggedUser();  
             }) 
         } catch (err) {
             if(err.code === "auth/wrong-password"){
@@ -68,7 +72,8 @@ import { ProductContext } from '../../component/contextFile/ProductContext';
          setLogError(loginValidation(regValue))
          setCorrectData(true);
          if (Object.keys(logError).length === 0 && correctData){ 
-            logInWithEmailAndPassword();      
+            logInWithEmailAndPassword(); 
+            history.push(from, {replace: true});     
    }
         
      }

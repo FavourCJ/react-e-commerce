@@ -22,6 +22,7 @@ function ProductProvider (props){
     const [other, setOther] = useState([]);
     const [cartArray, setCartArray] = useState([]);
     const [wishListArray, setWishListArray] = useState([]);
+    const [showButtons, setShowButtons] = useState(false);
     
     const batch = writeBatch(db);
    
@@ -39,6 +40,13 @@ function ProductProvider (props){
       });
     
     }
+    
+     //check login dtatus
+  const checkeLoginStatus = () =>{
+    if(localStorage.getItem('loggedUser') === "true" && localStorage.getItem("category") ==="Customer"){
+      setShowButtons(true)
+    }
+  }
 
     //retreiving specific product list
     const getProducts = async()=>{
@@ -234,7 +242,7 @@ function ProductProvider (props){
                           female, getMaleCollection, male, getOtherCollection,
                            other, saveCartArrayProduct, getCartArray, cartArray,
                            removeSavedDataArray, saveArrayWishListProduct, wishListArray,
-                           getWishList,};
+                           getWishList, showButtons, checkeLoginStatus};
      
     return(
         <ProductContext.Provider value={allExports}>

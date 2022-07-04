@@ -6,7 +6,7 @@ import Header from '../../../component/generalComponent/header/Header';
 import Footer from '../../../component/generalComponent/footer/Footer';
 
 function AllProductListDisplay() {
-  const {getAllProducts, allProduct, setLocalStorageData, saveArrayProduct} = useContext(ProductContext);
+  const {getAllProducts, allProduct, setLocalStorageData, saveCartArrayProduct} = useContext(ProductContext);
   const history = useHistory();
    
   useEffect(() =>{
@@ -31,7 +31,7 @@ function AllProductListDisplay() {
                onClick={()=>
                 {
                 setLocalStorageData(val);
-                saveArrayProduct(val);
+                saveCartArrayProduct(val);
                 history.push("/view-product")}}>
                   View Product</button>  
             

@@ -45,8 +45,10 @@ function Register() {
         setRedirect(true);
         setLoadData(false)
           if (formValue.category === "Customer"){
+            localStorage.setItem('category',"Customer")    
             history.push("/")
           }else if (formValue.category === "Admin"){
+            localStorage.setItem('category', "Admin"); 
             history.push("/admin")
           }             
       })

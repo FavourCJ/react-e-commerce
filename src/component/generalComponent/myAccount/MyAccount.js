@@ -35,13 +35,14 @@ const editMyAccount = async () =>{
 
   const logOut =() =>{
     const auth = getAuth();
-    signOut(auth).then(() => {
+     signOut(auth).then(() => {
       removeLocalStorageData();
-      localStorage.setItem('loggedUser', false)
-     history.push("/login")
+      localStorage.setItem('loggedUser', false);   
    }).catch((error) => {
-  console.log(error)
+     console.log(error)
 });
+   localStorage.setItem('category', "noUser");  
+   history.push("/login"); 
   }
 
   useEffect(() =>{

@@ -14,19 +14,18 @@ import { ProductContext } from '../../contextFile/ProductContext';
 
 function Header() {
 
-  const { getCartArray, cartArray, wishListArray, getWishList} = useContext(ProductContext); 
+  const { 
+    getCartArray, 
+    cartArray, 
+    wishListArray, 
+    getWishList, 
+    showButtons, 
+    checkeLoginStatus,
+  } = useContext(ProductContext); 
   const [showMenu, setShowMenu] = useState(false);
-  const [showButtons, setShowButtons] = useState(false);
   const [showSearch, setShowSearch] = useState(true);
   const [cartNum, setCartNum] = useState();
-  const [wishNum, setWishNum] = useState(0);
-  
-  //check login dtatus
-  const checkeLoginStatus = () =>{
-    if(localStorage.getItem('loggedUser') === "true"){
-      setShowButtons(true)
-    }
-  }
+  const [wishNum, setWishNum] = useState();
 
   //set cart number
   const numFunction = () =>{
@@ -34,15 +33,29 @@ function Header() {
       setCartNum(cartArray.length);
     }else if (!cartArray){
       setCartNum(0)
+    }if (cartArray){
+      if (cartArray.length > 9){
+        setCartNum("9+")
+      }
     }
 
     if(wishListArray){
       setWishNum(wishListArray.length)
     }else if (!wishListArray){
-      setWishNum(0)
+      setWishNum(0);
+
+    }else if (wishListArray.length > 9){
+      setWishNum("9+");
+      console.log(wishListArray.length)
 
     }
+    if (wishListArray){
+      if (wishListArray.length > 9){
+        setWishNum("9+")
+      }
+    }
   }
+
 
   useEffect(() =>{
     checkeLoginStatus();
@@ -87,15 +100,15 @@ function Header() {
    </div>
     <a className='menu-link' href='/'> Contact Us  </a>
       <a className='menu-link' href='/'> About Us  </a>
-      <a className='login' href='/login' id = {showButtons ? "hide-login-signUp" : "nnbn"}> Login </a>
+      <a className='login' href='/login' id = {showButtons ? "hide-login-signUp" : ""}> Login </a>
       <a className='signUp' href='/register' id = {showButtons ? "hide-login-signUp" : ""}> Sign Up </a>      
        </div>
       </div>
 
-      <div className='wishlist-cart-search-container'>
+      <div className='wishlist-cart-search-container' id ={showButtons ? "show-avater": "hide-avater"}>
       <div className='cart-container'>
-          <a href='/your-account' className='cart-icon'>
-          <UserOutlined style={{ color: 'black' }} id ={showButtons ? "show-avater": "hide-avater"}/>
+          <a href='/your-account' className='cart-icon' >
+          <UserOutlined style={{ color: 'black' }} />
           </a>
         </div>
 

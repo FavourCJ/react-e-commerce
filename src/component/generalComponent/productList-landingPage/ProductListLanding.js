@@ -14,7 +14,16 @@ import {
 
 function ProductListLanding() {
 
-  const {getAllProducts, allProduct, setLocalStorageData, saveCartArrayProduct, saveArrayWishListProduct} = useContext(ProductContext);
+  const {
+    getAllProducts, 
+    allProduct, 
+    setLocalStorageData, 
+    saveCartArrayProduct,
+     saveArrayWishListProduct,
+     showButtons, 
+     checkeLoginStatus,
+    } = useContext(ProductContext);
+
   const history = useHistory();
   const responsive = {
     superLargeDesktop: {
@@ -38,6 +47,7 @@ function ProductListLanding() {
 
   useEffect(() =>{
     getAllProducts();
+    checkeLoginStatus();
   },[])
 
   return (
@@ -53,27 +63,41 @@ function ProductListLanding() {
             <p className='product-list-detail-p'> Available stock:<span className='product-list-detail-span'>{val.AvailableStock}</span></p>
             <p className='product-list-detail-p'> Gender: <span className='product-list-detail-span'>{val.ItemGender}</span></p>
            
-            <div className='product-list-buttons'>
-            <button 
-              className='product-list-section-btn'
-              onClick={() =>{
-                saveArrayWishListProduct(val);
-              }}><HeartOutlined /></button>
-            <button 
-                className='product-list-section-btn'
-                onClick={()=>{
-                  setLocalStorageData(val);
-                history.push("/view-product");
-                window.location.reload(false);}}><EyeOutlined /></button>
-              <button 
-                className='product-list-section-btn'
-                onClick={() =>{
-                  saveCartArrayProduct(val);
-                  window.location.reload(false);
-                  }}>
-                <ShoppingCartOutlined /></button>
-                      
-            </div>        
+           {showButtons ? 
+               <div className='product-list-buttons'>
+               <button 
+                 className='product-list-section-btn'
+                 onClick={() =>{
+                   saveArrayWishListProduct(val);
+                 }}><HeartOutlined /></button>
+               <button 
+                   className='product-list-section-btn'
+                   onClick={()=>{
+                     setLocalStorageData(val);
+                   history.push("/view-product");
+                   window.location.reload(false);}}><EyeOutlined /></button>
+                 <button 
+                   className='product-list-section-btn'
+                   onClick={() =>{
+                     saveCartArrayProduct(val);
+                     window.location.reload(false);
+                     }}>
+                   <ShoppingCartOutlined /></button>
+                         
+               </div>  
+           : 
+           <div className='view-order-item-btn'> 
+           <button className='view-item' 
+              onClick={()=>
+               {
+               setLocalStorageData(val);
+               saveCartArrayProduct(val);
+               history.push("/view-product")}}>
+                 View Product</button>  
+           
+       </div>
+        }
+                 
         </div> 
         </div> 
         </div>  
